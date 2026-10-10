@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-10T10:18:26.282Z",
+ "generated": "2026-10-10T10:19:15.375Z",
  "bots": {
   "Web Developer": {
    "status": "working",
@@ -8,11 +8,16 @@
      "task": "Gold paper-trading bot",
      "started": "11:04",
      "eta": "13:00"
+    },
+    {
+     "task": "Brand income ideas: web & digital products",
+     "started": "11:18",
+     "eta": "12:15"
     }
    ],
    "last": {
     "date": "2026-10-10",
-    "task": "Bot office status page (Minecraft style)"
+    "task": "Brand income ideas: web & digital products"
    }
   },
   "Grok Bot": {
@@ -21,6 +26,86 @@
    "last": {
     "date": "2026-10-10",
     "task": "Coordinate all bots: brand ideas + autonomous income opportunities"
+   }
+  },
+  "Designer": {
+   "status": "working",
+   "tasks": [
+    {
+     "task": "Brand identity & design-led income ideas ( Designer in brand-income-project.md)",
+     "started": "11:18",
+     "eta": "11:45"
+    }
+   ],
+   "last": {
+    "date": "2026-10-10",
+    "task": "Brand identity & design-led income ideas ( Designer in brand-income-project.md)"
+   }
+  },
+  "Membership Team": {
+   "status": "working",
+   "tasks": [
+    {
+     "task": "Recurring income ideas for brand-income project",
+     "started": "11:18",
+     "eta": "12:00"
+    }
+   ],
+   "last": {
+    "date": "2026-10-10",
+    "task": "Recurring income ideas for brand-income project"
+   }
+  },
+  "Chief of Staff": {
+   "status": "idle",
+   "tasks": [],
+   "last": {
+    "date": "2026-10-10",
+    "task": "Brand list + bot ownership for group project"
+   }
+  },
+  "Game Generator": {
+   "status": "idle",
+   "tasks": [],
+   "last": {
+    "date": "2026-10-10",
+    "task": "Game ideas + passive game income for brand-income project"
+   }
+  },
+  "Happy shopper": {
+   "status": "working",
+   "tasks": [
+    {
+     "task": "Ecommerce ideas for brand-income project",
+     "started": "11:18",
+     "eta": "12:00"
+    }
+   ],
+   "last": {
+    "date": "2026-10-10",
+    "task": "Ecommerce ideas for brand-income project"
+   }
+  },
+  "Money": {
+   "status": "working",
+   "tasks": [
+    {
+     "task": "Brand income project: money check (rank income ideas)",
+     "started": "12:31",
+     "eta": "12:45"
+    }
+   ],
+   "last": {
+    "date": "2026-10-10",
+    "task": "Brand income project: money check (rank income ideas)"
+   }
+  },
+  "Content Creator": {
+   "status": "idle",
+   "tasks": [],
+   "last": {
+    "date": "2026-10-10",
+    "task": "Brand content & income ideas"
    }
   }
  }
