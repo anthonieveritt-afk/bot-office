@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-10T19:24:19.464Z",
+ "generated": "2026-10-10T19:24:36.463Z",
  "bots": {
   "Web Developer": {
    "status": "idle",
@@ -47,7 +47,7 @@
    "lastActivity": "2026-10-10T17:21:10.348Z"
   },
   "Game Generator": {
-   "status": "active",
+   "status": "idle",
    "tasks": [],
    "last": {
     "date": "2026-10-10",
