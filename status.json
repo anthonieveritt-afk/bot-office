@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-10T10:20:26.336Z",
+ "generated": "2026-10-10T10:21:05.101Z",
  "bots": {
   "Web Developer": {
    "status": "working",
@@ -18,7 +18,8 @@
    "last": {
     "date": "2026-10-10",
     "task": "Bot Office live status upgrade"
-   }
+   },
+   "lastActivity": "2026-10-10T10:12:39.191Z"
   },
   "Grok Bot": {
    "status": "idle",
@@ -26,7 +27,8 @@
    "last": {
     "date": "2026-10-10",
     "task": "Coordinate all bots: brand ideas + autonomous income opportunities"
-   }
+   },
+   "lastActivity": "2026-10-10T07:16:47.488Z"
   },
   "Designer": {
    "status": "idle",
@@ -34,7 +36,8 @@
    "last": {
     "date": "2026-10-10",
     "task": "Brand identity & design-led income ideas ( Designer in brand-income-project.md)"
-   }
+   },
+   "lastActivity": "2026-10-10T07:16:50.128Z"
   },
   "Membership Team": {
    "status": "idle",
@@ -42,7 +45,8 @@
    "last": {
     "date": "2026-10-10",
     "task": "Recurring income ideas for brand-income project"
-   }
+   },
+   "lastActivity": "2026-10-10T07:16:47.520Z"
   },
   "Chief of Staff": {
    "status": "idle",
@@ -50,7 +54,8 @@
    "last": {
     "date": "2026-10-10",
     "task": "Brand list + bot ownership for group project"
-   }
+   },
+   "lastActivity": "2026-10-10T07:16:47.500Z"
   },
   "Game Generator": {
    "status": "idle",
@@ -58,7 +63,8 @@
    "last": {
     "date": "2026-10-10",
     "task": "Game ideas + passive game income for brand-income project"
-   }
+   },
+   "lastActivity": "2026-10-10T07:16:50.168Z"
   },
   "Happy shopper": {
    "status": "idle",
@@ -66,7 +72,8 @@
    "last": {
     "date": "2026-10-10",
     "task": "Ecommerce ideas for brand-income project"
-   }
+   },
+   "lastActivity": "2026-10-10T07:16:47.480Z"
   },
   "Money": {
    "status": "working",
@@ -80,7 +87,8 @@
    "last": {
     "date": "2026-10-10",
     "task": "Brand income project: money check (rank income ideas)"
-   }
+   },
+   "lastActivity": "2026-10-10T08:26:18.263Z"
   },
   "Content Creator": {
    "status": "idle",
@@ -88,7 +96,13 @@
    "last": {
     "date": "2026-10-10",
     "task": "Brand content & income ideas"
-   }
+   },
+   "lastActivity": "2026-10-10T07:16:50.172Z"
+  },
+  "Forza Karate Club Admin Bot": {
+   "status": "idle",
+   "tasks": [],
+   "lastActivity": "2026-10-10T07:16:50.160Z"
   }
  }
 }
