@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-10T21:46:25.691Z",
+ "generated": "2026-10-10T21:47:04.031Z",
  "bots": {
   "Web Developer": {
    "status": "working",
@@ -17,7 +17,7 @@
    "lastActivity": "2026-10-10T21:44:02.458Z"
   },
   "Grok Bot": {
-   "status": "active",
+   "status": "idle",
    "tasks": [],
    "last": {
     "date": "2026-10-10",
@@ -26,7 +26,7 @@
    "lastActivity": "2026-10-10T21:43:59.818Z"
   },
   "Designer": {
-   "status": "active",
+   "status": "idle",
    "tasks": [],
    "last": {
     "date": "2026-10-10",
@@ -35,7 +35,7 @@
    "lastActivity": "2026-10-10T21:43:59.818Z"
   },
   "Membership Team": {
-   "status": "active",
+   "status": "idle",
    "tasks": [],
    "last": {
     "date": "2026-10-10",
@@ -44,7 +44,7 @@
    "lastActivity": "2026-10-10T21:43:59.858Z"
   },
   "Chief of Staff": {
-   "status": "active",
+   "status": "idle",
    "tasks": [],
    "last": {
     "date": "2026-10-10",
@@ -53,7 +53,7 @@
    "lastActivity": "2026-10-10T21:43:59.838Z"
   },
   "Game Generator": {
-   "status": "active",
+   "status": "idle",
    "tasks": [],
    "last": {
     "date": "2026-10-10",
@@ -62,7 +62,7 @@
    "lastActivity": "2026-10-10T21:43:59.826Z"
   },
   "Happy shopper": {
-   "status": "active",
+   "status": "idle",
    "tasks": [],
    "last": {
     "date": "2026-10-10",
@@ -86,7 +86,7 @@
    "lastActivity": "2026-10-10T21:43:59.862Z"
   },
   "Content Creator": {
-   "status": "active",
+   "status": "idle",
    "tasks": [],
    "last": {
     "date": "2026-10-10",
@@ -95,7 +95,7 @@
    "lastActivity": "2026-10-10T21:43:59.830Z"
   },
   "Forza Karate Club Admin Bot": {
-   "status": "active",
+   "status": "idle",
    "tasks": [],
    "lastActivity": "2026-10-10T21:43:59.822Z"
   }
