@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-10T22:40:33.229Z",
+ "generated": "2026-10-10T22:43:06.135Z",
  "bots": {
   "Web Developer": {
    "status": "idle",
@@ -65,7 +65,7 @@
    "lastActivity": "2026-10-10T21:43:59.810Z"
   },
   "Money": {
-   "status": "active",
+   "status": "idle",
    "tasks": [],
    "last": {
     "date": "2026-10-10",
