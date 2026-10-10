@@ -74,7 +74,11 @@ function el(n,b,w){const i=Math.max(0,BOTS.indexOf(n))%COL.length,[skin,shirt]=C
   `<div class="fig"><div class="head" style="background:${skin}"></div><div class="body" style="background:${shirt}"></div><div class="arm l" style="background:${skin}"></div><div class="arm r" style="background:${skin}"></div></div><div class="name">${esc(n)}</div>`}
  return d}
 document.onclick=()=>tip.style.display='none';
-async function poll(){for(const u of SRC){try{const r=await fetch(u+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)continue;const j=await r.json();
+const API="https://api.github.com/repos/anthonieveritt-afk/bot-office/contents/status.json?ref=main";let etag=null,apiOff=0;
+async function getApi(){if(Date.now()<apiOff)throw 0;const h={Accept:'application/vnd.github.raw+json'};if(etag)h['If-None-Match']=etag;
+ const r=await fetch(API,{cache:'no-store',headers:h});if(r.status===304)return null;if(!r.ok){apiOff=Date.now()+5*60e3;throw 0}etag=r.headers.get('ETag');return r.json()}
+async function poll(){try{const j=await getApi();if(j&&(!data||Date.parse(j.generated)>=Date.parse(data.generated)))data=j;fetchedAt=Date.now();render();clock();return}catch(e){}
+ for(const u of SRC){try{const r=await fetch(u+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)continue;const j=await r.json();
   if(!data||Date.parse(j.generated)>=Date.parse(data.generated)){data=j}fetchedAt=Date.now();break}catch(e){}}render();clock()}
 function clock(){const u=document.getElementById('upd');if(!data){u.textContent='No status yet';return}
  const age=Math.round((Date.now()-Date.parse(data.generated))/1000),stale=age>420;
