@@ -1,0 +1,65 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bot Office</title><style>
+*{box-sizing:border-box}body{margin:0;font-family:monospace;background:#3b2a1a;color:#fff;image-rendering:pixelated}
+header{padding:10px 14px;background:#2b1d10;border-bottom:4px solid #1a1108;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+h1{margin:0;font-size:18px}#upd{font-size:12px;opacity:.8}#stale{display:none;background:#b33;padding:6px 14px;font-size:13px}
+.floor{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;padding:14px;
+background:repeating-conic-gradient(#8a6a44 0 25%,#7a5c3a 0 50%) 0 0/32px 32px;min-height:calc(100vh - 50px)}
+.zone{grid-column:1/-1;font-size:14px;background:#0006;padding:4px 8px;width:max-content}
+.spot{position:relative;height:190px;cursor:pointer;background:#0002;border:3px solid #0003}
+.spot:focus{outline:3px solid #ff0}
+.name{position:absolute;bottom:2px;left:0;right:0;text-align:center;font-size:11px;background:#0008;padding:2px}
+.desk{position:absolute;bottom:22px;left:15%;width:70%;height:34px;background:#5b3b1e;border:3px solid #3a240f}
+.pc{position:absolute;bottom:56px;left:50%;width:50px;height:36px;margin-left:-25px;background:#222;border:3px solid #555}
+.pc i{position:absolute;inset:3px;background:#3cf;animation:glow 1s steps(2) infinite}
+.table{position:absolute;bottom:22px;left:10%;width:80%;height:26px;background:#9c7a4a;border:3px solid #5c4422}
+.fig{position:absolute;left:50%;width:36px;margin-left:-18px}
+.head{width:36px;height:36px;border:3px solid #0005;position:relative}
+.head:before,.head:after{content:"";position:absolute;top:13px;width:6px;height:6px;background:#224}
+.head:before{left:6px}.head:after{right:6px}
+.body{width:36px;height:34px;border:3px solid #0004}
+.arm{position:absolute;top:40px;width:10px;height:28px;background:#d9a066;border:2px solid #0004}
+.arm.l{left:-10px}.arm.r{right:-10px}
+.work .fig{bottom:62px}.work .arm{animation:type .3s steps(2) infinite;transform-origin:top}.work .arm.r{animation-delay:.15s}
+.work .fig{animation:bob .6s steps(2) infinite}
+.idle .fig{bottom:40px;transform:rotate(8deg);animation:nod 3s steps(3) infinite}
+.idle .head:before,.idle .head:after{height:2px;top:16px}
+.z{position:absolute;right:14%;top:10px;font-weight:bold;font-size:16px;color:#cff;animation:zz 2.4s linear infinite}
+.z:nth-of-type(2){animation-delay:.8s}.z:nth-of-type(3){animation-delay:1.6s}
+.dream{position:absolute;left:6px;top:6px;background:#fff;color:#333;border-radius:50%;padding:6px 8px;font-size:16px;border:2px solid #999}
+#tip{position:fixed;display:none;z-index:9;background:#111e;border:3px solid #ff0;padding:10px;font-size:13px;max-width:280px;line-height:1.4}
+@keyframes glow{50%{background:#7ef}}@keyframes type{50%{transform:rotate(-25deg)}}
+@keyframes bob{50%{margin-bottom:2px}}@keyframes nod{50%{transform:rotate(14deg)}}
+@keyframes zz{0%{opacity:0;transform:translate(0,20px)}50%{opacity:1}100%{opacity:0;transform:translate(14px,-14px)}}
+@media(max-width:500px){.floor{grid-template-columns:repeat(2,1fr);gap:8px;padding:8px}}
+</style></head><body>
+<header><h1>⛏ Anthoni's Bot Office</h1><span id="upd">loading…</span></header>
+<div id="stale">Status feed is out of date or unavailable, showing last known.</div>
+<main class="floor" id="floor"></main><div id="tip"></div>
+<script>
+const BOTS=["Grok Bot","Chief of Staff","Web Developer","Designer","Happy shopper","Forza Karate Club Admin Bot","Content Creator","Membership Team","Money","Game Generator"];
+const COL=[["#e0b080","#3a6ee8"],["#c98c5a","#333"],["#f0c090","#2e8b57"],["#d9a066","#c2185b"],["#e8b888","#f9a825"],["#c68642","#fff"],["#f1c27d","#8e24aa"],["#e0ac69","#00838f"],["#d2a679","#2e7d32"],["#ffcc99","#e65100"]];
+const DREAMS=["🐑","💤","🥋","🍕","🌙","⭐","🏆","💰","🎮","☁️"];
+let data=null;const tip=document.getElementById('tip');
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function render(){const f=document.getElementById('floor');f.innerHTML='';
+ const st=(data&&data.bots)||{};const names=[...new Set([...BOTS,...Object.keys(st)])];
+ const work=names.filter(n=>st[n]&&st[n].status==='working'),idle=names.filter(n=>!work.includes(n));
+ [["💻 Desks: working",work],["☕ Break table: idle",idle]].forEach(([t,list])=>{if(!list.length)return;
+  const z=document.createElement('div');z.className='zone';z.textContent=t+' ('+list.length+')';f.appendChild(z);
+  list.forEach(n=>{const i=Math.max(0,BOTS.indexOf(n))%COL.length,w=work.includes(n),[skin,shirt]=COL[i];
+   const d=document.createElement('div');d.className='spot '+(w?'work':'idle');d.tabIndex=0;
+   d.innerHTML=(w?'<div class="desk"></div><div class="pc"><i></i></div>':'<div class="table"></div><span class="z">Z</span><span class="z">z</span><span class="z">z</span><div class="dream">'+DREAMS[i]+'</div>')+
+   `<div class="fig"><div class="head" style="background:${skin}"></div><div class="body" style="background:${shirt}"></div><div class="arm l" style="background:${skin}"></div><div class="arm r" style="background:${skin}"></div></div><div class="name">${esc(n)}</div>`;
+   const show=e=>{const tasks=(st[n]&&st[n].tasks)||[];
+    tip.innerHTML=`<b>${esc(n)}</b><br>${w?'🟢 Working':'😴 Idle'}<br>`+(tasks.length?tasks.map(t=>`• ${esc(t.task)}<br>&nbsp;&nbsp;start ${esc(t.started)} · est. finish ${esc(t.eta)} UK`).join('<br>'):(st[n]&&st[n].last?`Last: ${esc(st[n].last.task)} (${esc(st[n].last.date)})`:'No tasks logged today'));
+    tip.style.display='block';const r=d.getBoundingClientRect();
+    tip.style.left=Math.min(innerWidth-290,Math.max(4,r.left))+'px';tip.style.top=Math.min(innerHeight-tip.offsetHeight-4,r.bottom+4)+'px';e.stopPropagation()};
+   d.onmouseenter=show;d.onclick=show;d.onfocus=show;d.onmouseleave=()=>tip.style.display='none';f.appendChild(d)})})}
+document.onclick=()=>tip.style.display='none';
+async function poll(){try{const r=await fetch('status.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw 0;data=await r.json()}catch(e){}
+ const age=data?(Date.now()-Date.parse(data.generated))/60000:1e9;
+ document.getElementById('stale').style.display=age>15?'block':'none';
+ document.getElementById('upd').textContent=data?'Updated '+new Date(data.generated).toLocaleTimeString('en-GB',{timeZone:'Europe/London',hour:'2-digit',minute:'2-digit'})+' UK':'No status yet';render()}
+poll();setInterval(poll,30000);
+</script></body></html>
