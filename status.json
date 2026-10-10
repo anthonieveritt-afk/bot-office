@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-10T10:32:44.661Z",
+ "generated": "2026-10-10T10:34:42.713Z",
  "bots": {
   "Web Developer": {
    "status": "working",
@@ -91,14 +91,8 @@
    "lastActivity": "2026-10-10T07:16:47.480Z"
   },
   "Money": {
-   "status": "working",
-   "tasks": [
-    {
-     "task": "Brand income project: money check (rank income ideas)",
-     "started": "12:31",
-     "eta": "12:45"
-    }
-   ],
+   "status": "idle",
+   "tasks": [],
    "last": {
     "date": "2026-10-10",
     "task": "Brand income project: money check (rank income ideas)"
