@@ -13,7 +13,8 @@ function build(){const bots={},t=today(),now=Date.now();let lines=[];try{lines=f
  const get=n=>bots[n]||(bots[n]={status:'idle',tasks:[]});
  for(const l of lines){const p=l.split('|').map(s=>s.trim());if(p.length<7||!/^\d{4}-\d{2}-\d{2}$/.test(p[0]))continue;
   const [date,bot,task,started,eta,actual,status]=p;const n=clean(bot);if(!n)continue;const b=get(n);b.last={date,task:clean(task)};
-  if(date===t&&!actual&&!DONE.test(status)){b.status='working';b.tasks.push({task:clean(task),started:clean(started),eta:clean(eta)})}}
+  const hm=new Date().toLocaleTimeString('en-GB',{timeZone:'Europe/London',hour12:false,hour:'2-digit',minute:'2-digit'});
+  if(date===t&&!actual&&!DONE.test(status)&&!(/^\d\d:\d\d$/.test(started)&&started>hm)){b.status='working';b.tasks.push({task:clean(task),started:clean(started),eta:clean(eta)})}}
  for(const [n,m] of Object.entries(activity())){const b=get(n);b.lastActivity=m?new Date(m).toISOString():null;
   if(m&&now-m<ACT_MS&&b.status==='idle')b.status='active'}
  return bots}
