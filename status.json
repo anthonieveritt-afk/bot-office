@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-10T10:19:26.310Z",
+ "generated": "2026-10-10T10:20:15.406Z",
  "bots": {
   "Web Developer": {
    "status": "working",
@@ -10,14 +10,14 @@
      "eta": "13:00"
     },
     {
-     "task": "Brand income ideas: web & digital products",
-     "started": "11:18",
-     "eta": "12:15"
+     "task": "Bot Office live status upgrade",
+     "started": "11:19",
+     "eta": "12:00"
     }
    ],
    "last": {
     "date": "2026-10-10",
-    "task": "Brand income ideas: web & digital products"
+    "task": "Bot Office live status upgrade"
    }
   },
   "Grok Bot": {
@@ -29,14 +29,8 @@
    }
   },
   "Designer": {
-   "status": "working",
-   "tasks": [
-    {
-     "task": "Brand identity & design-led income ideas ( Designer in brand-income-project.md)",
-     "started": "11:18",
-     "eta": "11:45"
-    }
-   ],
+   "status": "idle",
+   "tasks": [],
    "last": {
     "date": "2026-10-10",
     "task": "Brand identity & design-led income ideas ( Designer in brand-income-project.md)"
@@ -73,14 +67,8 @@
    }
   },
   "Happy shopper": {
-   "status": "working",
-   "tasks": [
-    {
-     "task": "Ecommerce ideas for brand-income project",
-     "started": "11:18",
-     "eta": "12:00"
-    }
-   ],
+   "status": "idle",
+   "tasks": [],
    "last": {
     "date": "2026-10-10",
     "task": "Ecommerce ideas for brand-income project"
