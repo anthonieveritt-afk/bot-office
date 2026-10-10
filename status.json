@@ -1,12 +1,18 @@
 {
- "generated": "2026-10-10T19:29:19.467Z",
+ "generated": "2026-10-10T21:43:53.876Z",
  "bots": {
   "Web Developer": {
-   "status": "idle",
-   "tasks": [],
+   "status": "working",
+   "tasks": [
+    {
+     "task": "Club Honbu demo club (staging, fake data) for reel",
+     "started": "22:43",
+     "eta": "23:45"
+    }
+   ],
    "last": {
     "date": "2026-10-10",
-    "task": "Gold paper bot sweet-spot optimisation"
+    "task": "Club Honbu demo club (staging, fake data) for reel"
    },
    "lastActivity": "2026-10-10T17:21:13.332Z"
   },
