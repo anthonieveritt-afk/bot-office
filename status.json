@@ -1,15 +1,9 @@
 {
- "generated": "2026-10-10T11:00:18.783Z",
+ "generated": "2026-10-10T11:11:17.021Z",
  "bots": {
   "Web Developer": {
-   "status": "working",
-   "tasks": [
-    {
-     "task": "Club Honbu Stripe billing",
-     "started": "11:27",
-     "eta": "14:00"
-    }
-   ],
+   "status": "idle",
+   "tasks": [],
    "last": {
     "date": "2026-10-10",
     "task": "Gold paper bot sweet-spot optimisation"
