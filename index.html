@@ -32,6 +32,11 @@ background:repeating-conic-gradient(#8a6a44 0 25%,#7a5c3a 0 50%) 0 0/32px 32px;m
 @keyframes bob{50%{margin-bottom:2px}}@keyframes nod{50%{transform:rotate(14deg)}}
 @keyframes zz{0%{opacity:0;transform:translate(0,20px)}50%{opacity:1}100%{opacity:0;transform:translate(14px,-14px)}}
 @media(max-width:500px){.floor{grid-template-columns:repeat(2,1fr);gap:8px;padding:8px}}
+.dot{position:absolute;top:6px;right:6px;width:12px;height:12px;background:#3f3;border:2px solid #050;animation:pulse 1.2s infinite}
+.stale-b .dot{background:#fb0;border-color:#640}.stale-b{border-color:#fb0!important}.badge{position:absolute;top:4px;left:4px;font-size:10px;background:#fb0;color:#000;padding:1px 4px}
+.active .badge{background:#3f3}.spot{transition:border-color .3s}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #3f3a}70%{box-shadow:0 0 0 8px #3f30}100%{box-shadow:0 0 0 0 #3f30}}
+#live{display:inline-block;width:9px;height:9px;background:#3f3;margin-right:5px;animation:pulse 1.2s infinite}
 </style></head><body>
 <header><h1>⛏ Anthoni's Bot Office</h1><span id="upd">loading…</span></header>
 <div id="stale">Status feed is out of date or unavailable, showing last known.</div>
@@ -40,26 +45,40 @@ background:repeating-conic-gradient(#8a6a44 0 25%,#7a5c3a 0 50%) 0 0/32px 32px;m
 const BOTS=["Grok Bot","Chief of Staff","Web Developer","Designer","Happy shopper","Forza Karate Club Admin Bot","Content Creator","Membership Team","Money","Game Generator"];
 const COL=[["#e0b080","#3a6ee8"],["#c98c5a","#333"],["#f0c090","#2e8b57"],["#d9a066","#c2185b"],["#e8b888","#f9a825"],["#c68642","#fff"],["#f1c27d","#8e24aa"],["#e0ac69","#00838f"],["#d2a679","#2e7d32"],["#ffcc99","#e65100"]];
 const DREAMS=["🐑","💤","🥋","🍕","🌙","⭐","🏆","💰","🎮","☁️"];
-let data=null;const tip=document.getElementById('tip');
+const SRC=["https://raw.githubusercontent.com/anthonieveritt-afk/bot-office/main/status.json","status.json"];
+let data=null,fetchedAt=0;const tip=document.getElementById('tip'),floor=document.getElementById('floor'),els={},zones={};
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function render(){const f=document.getElementById('floor');f.innerHTML='';
- const st=(data&&data.bots)||{};const names=[...new Set([...BOTS,...Object.keys(st)])];
- const work=names.filter(n=>st[n]&&st[n].status==='working'),idle=names.filter(n=>!work.includes(n));
- [["💻 Desks: working",work],["☕ Break table: idle",idle]].forEach(([t,list])=>{if(!list.length)return;
-  const z=document.createElement('div');z.className='zone';z.textContent=t+' ('+list.length+')';f.appendChild(z);
-  list.forEach(n=>{const i=Math.max(0,BOTS.indexOf(n))%COL.length,w=work.includes(n),[skin,shirt]=COL[i];
-   const d=document.createElement('div');d.className='spot '+(w?'work':'idle');d.tabIndex=0;
-   d.innerHTML=(w?'<div class="desk"></div><div class="pc"><i></i></div>':'<div class="table"></div><span class="z">Z</span><span class="z">z</span><span class="z">z</span><div class="dream">'+DREAMS[i]+'</div>')+
-   `<div class="fig"><div class="head" style="background:${skin}"></div><div class="body" style="background:${shirt}"></div><div class="arm l" style="background:${skin}"></div><div class="arm r" style="background:${skin}"></div></div><div class="name">${esc(n)}</div>`;
-   const show=e=>{const tasks=(st[n]&&st[n].tasks)||[];
-    tip.innerHTML=`<b>${esc(n)}</b><br>${w?'🟢 Working':'😴 Idle'}<br>`+(tasks.length?tasks.map(t=>`• ${esc(t.task)}<br>&nbsp;&nbsp;start ${esc(t.started)} · est. finish ${esc(t.eta)} UK`).join('<br>'):(st[n]&&st[n].last?`Last: ${esc(st[n].last.task)} (${esc(st[n].last.date)})`:'No tasks logged today'));
-    tip.style.display='block';const r=d.getBoundingClientRect();
-    tip.style.left=Math.min(innerWidth-290,Math.max(4,r.left))+'px';tip.style.top=Math.min(innerHeight-tip.offsetHeight-4,r.bottom+4)+'px';e.stopPropagation()};
-   d.onmouseenter=show;d.onclick=show;d.onfocus=show;d.onmouseleave=()=>tip.style.display='none';f.appendChild(d)})})}
+const ukNow=()=>new Date().toLocaleTimeString('en-GB',{timeZone:'Europe/London',hour12:false,hour:'2-digit',minute:'2-digit'});
+const overdue=b=>b.status==='working'&&b.tasks.length&&b.tasks.every(t=>/^\d\d:\d\d$/.test(t.eta)&&t.eta<ukNow());
+const fmt=iso=>iso?new Date(iso).toLocaleTimeString('en-GB',{timeZone:'Europe/London',hour:'2-digit',minute:'2-digit'}):'';
+function zone(k,label){if(!zones[k]){const z=document.createElement('div');z.className='zone';floor.appendChild(z);zones[k]=z}zones[k].dataset.l=label;return zones[k]}
+function render(){const st=(data&&data.bots)||{};const names=[...new Set([...BOTS,...Object.keys(st)])].filter(n=>!n.includes(','));
+ const isW=n=>st[n]&&(st[n].status==='working'||st[n].status==='active');
+ const work=names.filter(isW),idle=names.filter(n=>!isW(n));
+ const first={};Object.entries(els).forEach(([n,e])=>first[n]=e.getBoundingClientRect());
+ const zw=zone('w'),zi=zone('i');zw.textContent='💻 Desks: working ('+work.length+')';zi.textContent='☕ Break table: idle ('+idle.length+')';
+ floor.appendChild(zw);work.forEach(n=>floor.appendChild(el(n,st[n]||{},true)));floor.appendChild(zi);idle.forEach(n=>floor.appendChild(el(n,st[n]||{},false)));
+ zw.style.display=work.length?'':'none';
+ Object.entries(els).forEach(([n,e])=>{const f=first[n];if(!f)return;const l=e.getBoundingClientRect(),dx=f.left-l.left,dy=f.top-l.top;
+  if(dx||dy){e.style.transition='none';e.style.transform=`translate(${dx}px,${dy}px)`;requestAnimationFrame(()=>requestAnimationFrame(()=>{e.style.transition='transform .9s ease, border-color .3s';e.style.transform=''}))}})}
+function el(n,b,w){const i=Math.max(0,BOTS.indexOf(n))%COL.length,[skin,shirt]=COL[i],od=overdue(b),act=b.status==='active';
+ const sig=[w,od,act].join();let d=els[n];if(!d){d=els[n]=document.createElement('div');d.tabIndex=0;
+  const show=e=>{const bb=(data&&data.bots&&data.bots[n])||{},tasks=bb.tasks||[];
+   tip.innerHTML=`<b>${esc(n)}</b><br>`+(bb.status==='working'?(overdue(bb)?'🟠 Possibly stale (past estimated finish)':'🟢 Working'):bb.status==='active'?'🟢 Active (recent activity)':'😴 Idle')+'<br>'+
+   (tasks.length?tasks.map(t=>`• ${esc(t.task)}<br>&nbsp;&nbsp;start ${esc(t.started)} · est. finish ${esc(t.eta)} UK`).join('<br>'):(bb.last?`Last: ${esc(bb.last.task)} (${esc(bb.last.date)})`:'No tasks logged today'))+
+   (bb.lastActivity?`<br><small>Last activity ${fmt(bb.lastActivity)} UK</small>`:'');
+   tip.style.display='block';const r=d.getBoundingClientRect();tip.style.left=Math.min(innerWidth-290,Math.max(4,r.left))+'px';tip.style.top=Math.min(innerHeight-tip.offsetHeight-4,r.bottom+4)+'px';e.stopPropagation()};
+  d.onmouseenter=show;d.onclick=show;d.onfocus=show;d.onmouseleave=()=>tip.style.display='none'}
+ if(d.dataset.sig!==sig){d.dataset.sig=sig;d.className='spot '+(w?'work':'idle')+(od?' stale-b':'')+(act?' active':'');
+  d.innerHTML=(w?'<div class="desk"></div><div class="pc"><i></i></div><span class="dot"></span>'+(od?'<span class="badge">possibly stale</span>':act?'<span class="badge">recent activity</span>':''):'<div class="table"></div><span class="z">Z</span><span class="z">z</span><span class="z">z</span><div class="dream">'+DREAMS[i]+'</div>')+
+  `<div class="fig"><div class="head" style="background:${skin}"></div><div class="body" style="background:${shirt}"></div><div class="arm l" style="background:${skin}"></div><div class="arm r" style="background:${skin}"></div></div><div class="name">${esc(n)}</div>`}
+ return d}
 document.onclick=()=>tip.style.display='none';
-async function poll(){try{const r=await fetch('status.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw 0;data=await r.json()}catch(e){}
- const age=data?(Date.now()-Date.parse(data.generated))/60000:1e9;
- document.getElementById('stale').style.display=age>15?'block':'none';
- document.getElementById('upd').textContent=data?'Updated '+new Date(data.generated).toLocaleTimeString('en-GB',{timeZone:'Europe/London',hour:'2-digit',minute:'2-digit'})+' UK':'No status yet';render()}
-poll();setInterval(poll,30000);
+async function poll(){for(const u of SRC){try{const r=await fetch(u+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)continue;const j=await r.json();
+  if(!data||Date.parse(j.generated)>=Date.parse(data.generated)){data=j}fetchedAt=Date.now();break}catch(e){}}render();clock()}
+function clock(){const u=document.getElementById('upd');if(!data){u.textContent='No status yet';return}
+ const age=Math.round((Date.now()-Date.parse(data.generated))/1000),stale=age>420;
+ document.getElementById('stale').style.display=stale?'block':'none';
+ u.innerHTML=(stale?'⚠ ':'<span id="live"></span>Live, ')+'updated '+(age<90?age+'s':Math.round(age/60)+' min')+' ago · checked '+Math.round((Date.now()-fetchedAt)/1000)+'s ago'}
+poll();setInterval(poll,10000);setInterval(clock,1000);
 </script></body></html>
