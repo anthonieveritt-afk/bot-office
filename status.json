@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-10T19:09:19.455Z",
+ "generated": "2026-10-10T19:11:32.885Z",
  "bots": {
   "Web Developer": {
    "status": "idle",
@@ -68,14 +68,14 @@
    "status": "working",
    "tasks": [
     {
-     "task": "XAUUSD backtest: SMC strategy, last month, 40/40/20 TPs",
-     "started": "20:06",
-     "eta": "20:40"
+     "task": "XAUUSD backtest: 12 months, same rules",
+     "started": "20:11",
+     "eta": "21:15"
     }
    ],
    "last": {
     "date": "2026-10-10",
-    "task": "XAUUSD backtest: SMC strategy, last month, 40/40/20 TPs"
+    "task": "XAUUSD backtest: 12 months, same rules"
    },
    "lastActivity": "2026-10-10T19:09:17.652Z"
   },
