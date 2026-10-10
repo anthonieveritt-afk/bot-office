@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-10T21:47:04.031Z",
+ "generated": "2026-10-10T21:47:41.226Z",
  "bots": {
   "Web Developer": {
    "status": "working",
@@ -71,14 +71,8 @@
    "lastActivity": "2026-10-10T21:43:59.810Z"
   },
   "Money": {
-   "status": "working",
-   "tasks": [
-    {
-     "task": "XAUUSD 12m backtest: tighter SL, TPs every 20 pips",
-     "started": "22:46",
-     "eta": "23:15"
-    }
-   ],
+   "status": "idle",
+   "tasks": [],
    "last": {
     "date": "2026-10-10",
     "task": "XAUUSD 12m backtest: tighter SL, TPs every 20 pips"
