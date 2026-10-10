@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-10T10:20:15.406Z",
+ "generated": "2026-10-10T10:20:26.336Z",
  "bots": {
   "Web Developer": {
    "status": "working",
@@ -37,14 +37,8 @@
    }
   },
   "Membership Team": {
-   "status": "working",
-   "tasks": [
-    {
-     "task": "Recurring income ideas for brand-income project",
-     "started": "11:18",
-     "eta": "12:00"
-    }
-   ],
+   "status": "idle",
+   "tasks": [],
    "last": {
     "date": "2026-10-10",
     "task": "Recurring income ideas for brand-income project"
