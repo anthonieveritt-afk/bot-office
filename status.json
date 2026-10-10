@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-10T22:30:33.223Z",
+ "generated": "2026-10-10T22:33:05.697Z",
  "bots": {
   "Web Developer": {
    "status": "idle",
@@ -65,11 +65,17 @@
    "lastActivity": "2026-10-10T21:43:59.810Z"
   },
   "Money": {
-   "status": "active",
-   "tasks": [],
+   "status": "working",
+   "tasks": [
+    {
+     "task": "XAUUSD 24m backtest: order blocks + partial close on weakness + re-entry",
+     "started": "23:32",
+     "eta": "00:30"
+    }
+   ],
    "last": {
     "date": "2026-10-10",
-    "task": "XAUUSD 24m backtest: 25-pip SL vs 20-pip"
+    "task": "XAUUSD 24m backtest: order blocks + partial close on weakness + re-entry"
    },
    "lastActivity": "2026-10-10T22:30:06.090Z"
   },
